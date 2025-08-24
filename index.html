@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f8f9fa" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="icon.png" type="image/png">
+  <title>Gestión Panadería - Cristian Altamiranda</title>
+</head>
+
+<body>
+  <!-- ENCABEZADO -->
+  <header>
+    <h1>Gestión de Ventas - Panadería</h1>
+    <p class="autor">Versión Final - Desarrollado por Cristian Altamiranda</p>
+  </header>
+
+  <main>
+    <!-- SECCIÓN DE AUTENTICACIÓN -->
+    <section id="authSection">
+      <h2>Iniciar Sesión</h2>
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Usuario" required />
+        <input type="password" id="password" placeholder="Contraseña" required />
+        <button type="submit">Ingresar</button>
+        <button type="button" id="registerBtn">Registrarse</button>
+        <p id="authMessage"></p>
+      </form>
+
+      <!-- Campos extra para registro -->
+      <div id="registroExtra" style="display: none">
+        <input type="email" id="email" placeholder="Correo electrónico" required />
+        <input type="tel" id="phone" placeholder="Número de teléfono" required />
+        <button id="confirmarRegistroBtn">Confirmar Registro</button>
+      </div>
+    </section>
+
+    <!-- SECCIÓN PRINCIPAL DE LA APP -->
+    <section id="appSection" style="display: none">
+      <!-- BARRA DE HERRAMIENTAS PRINCIPAL -->
+      <div class="toolbar">
+	    <button id="toggleProductosBtn">Ver productos</button>
+        <button id="addStockBtn">Agregar stock del día</button>
+        <button id="reponerBtn">Reponer mercadería</button>
+        <button id="guardarSesionBtn">Guardar sesión</button>
+        <button id="exportarDatosBtn">Exportar datos</button>
+        <button id="verEstadisticasBtn">Ver estadísticas</button>
+        <button id="togglePreciosBtn">Mostrar precios</button>
+        <button id="cerrarSesionBtn">Cerrar sesión</button>
+        <button id="calcularPromediosBtn">Calcular promedios</button>
+		<button id="verComparativasBtn">Ver comparativas</button>
+        <div id="resultadosPromedios"></div>
+      </div>
+	  
+	  <section id="estadisticasGraficas" style="display:none; margin-top: 2em;">
+	  <h3>📈 Comparativas de Ventas</h3>
+
+	  <canvas id="graficoVentasPorDia" height="200"></canvas>
+	  <canvas id="graficoTurnosDia" height="200" style="margin-top: 2em;"></canvas>
+	  <canvas id="graficoProductosPorTurno" height="200" style="margin-top: 2em;"></canvas>
+	  </section>
+
+      <!-- CONTENEDORES DINÁMICOS DE PRODUCTOS Y TOTALES -->
+      <h2> * 			Listado de productos			 * </h2>
+	  <div id="productosContainer"></div>
+      <div id="totalesContainer"></div>
+
+      <!-- SECCIÓN DE VALORACIÓN -->
+      <section id="valoracion">
+        <h2>Valorá la app</h2>
+        <form id="formValoracion">
+          <label for="estrellas">Puntuación:</label>
+          <select id="estrellas">
+            <option value="1">★</option>
+            <option value="2">★★</option>
+            <option value="3">★★★</option>
+            <option value="4">★★★★</option>
+            <option value="5">★★★★★</option>
+          </select>
+          <textarea id="comentarioValoracion" maxlength="250" placeholder="Tu sugerencia o mejora (máx 250 caracteres)"></textarea>
+          <button type="submit">Enviar</button>
+        </form>
+        <div id="comentariosUsuarios"></div>
+      </section>
+
+      <!-- GRÁFICA DE PROMEDIOS -->
+      <section id="estadisticasPromedios" style="margin-top: 2em;">
+        <h3>Gráfica de Promedios de Venta</h3>
+        <canvas id="graficoPromedios" height="250"></canvas>
+      </section>
+	  
+	  <section id="estadisticasComparativas" style="display: none; margin-top: 2em;">
+	  <h3>Comparativa de ventas por turno</h3>
+	  <canvas id="graficoComparativo" height="250"></canvas>
+	  </section>
+
+
+      <!-- CONFIGURACIÓN DE HORARIOS DE TURNOS -->
+      <section id="configTurnos">
+        <h3>Configurar horarios de turno</h3>
+        <form id="formTurnos">
+          <label>
+            Mañana - Inicio:
+            <input type="time" id="inicioManana" required />
+          </label>
+          <label>
+            Mañana - Fin:
+            <input type="time" id="finManana" required />
+          </label>
+          <label>
+            Tarde - Inicio:
+            <input type="time" id="inicioTarde" required />
+          </label>
+          <label>
+            Tarde - Fin:
+            <input type="time" id="finTarde" required />
+          </label>
+          <button type="submit">Guardar horarios</button>
+        </form>
+      </section>
+    </section>
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer>
+    <p>&copy; 2025 - Cristian Altamiranda</p>
+  </footer>
+
+  <!-- SCRIPTS FUNCIONALES -->
+  <script src="login.js"></script>
+  <script src="app.js"></script>
+  <script src="db.js"></script>
+  <script src="chart-utils.js"></script>
+  <script src="auth.js"></script>
+  <script src="serviceWorker.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- MANTENER SESIÓN ACTIVA POR 15 MINUTOS -->
+  <script>
+    const mantenerSesion = () => {
+      const usuario = localStorage.getItem('usuarioActivo');
+      if (usuario) {
+        const ultimaActividad = parseInt(localStorage.getItem('ultimaActividad'), 10);
+        const ahora = Date.now();
+        if (ahora - ultimaActividad < 15 * 60 * 1000) {
+          document.getElementById('authSection').style.display = 'none';
+          document.getElementById('appSection').style.display = 'block';
+        } else {
+          localStorage.removeItem('usuarioActivo');
+          localStorage.removeItem('ultimaActividad');
+        }
+      }
+    };
+    mantenerSesion();
+  </script>
+  <!-- Modal de Exportación -->
+	<div id="modalExportar" class="modal" style="display: none;">
+	  <div class="modal-content">
+		<h3>Exportar datos</h3>
+		<p>Seleccioná el formato en el que querés descargar los registros:</p>
+		<button onclick="exportarDatos('csv')">📄 CSV</button>
+		<button onclick="exportarDatos('json')">🧾 JSON</button>
+		<button onclick="exportarDatos('pdf')">📊 PDF</button>
+		<br><br>
+		<button onclick="cerrarModalExportar()">❌ Cancelar</button>
+		
+		<label for="tipoExportacion" style="margin-left:1em;">Formato:</label>
+	    <select id="tipoExportacion">
+	      <option value="csv">CSV</option>
+	      <option value="json">JSON</option>
+	      <option value="pdf">PDF</option>
+	    </select>
+	  </div>
+	</div>
+
+</body>
+</html>

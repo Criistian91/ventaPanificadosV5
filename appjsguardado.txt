@@ -1,0 +1,688 @@
+
+
+
+
+
+
+
+
+// document.addEventListener("DOMContentLoaded", () => {
+  // const productosContainer = document.getElementById("productosContainer");
+  // const togglePreciosBtn = document.getElementById("togglePreciosBtn");
+  // const addStockBtn = document.getElementById("addStockBtn");
+  // const totalesContainer = document.getElementById("totalesContainer");
+
+  // let mostrarPrecios = false;
+  // let categoriaSeleccionada = "";
+
+  // const usuarioActivo = localStorage.getItem("usuarioActivo");
+  // if (!usuarioActivo) return;
+
+  // document.getElementById("authSection").style.display = "none";
+  // document.getElementById("appSection").style.display = "block";
+
+  // function crearSelectCategorias(productos) {
+    // let select = document.getElementById("selectCategorias");
+    // if (!select) {
+      // select = document.createElement("select");
+      // select.id = "selectCategorias";
+      // select.innerHTML = `<option value="">Todas las categorías</option>`;
+      // productosContainer.before(select);
+      // select.addEventListener("change", () => {
+        // categoriaSeleccionada = select.value;
+        // cargarProductos();
+      // });
+    // }
+
+    // const categorias = [...new Set(productos.map(p => p.categoria))];
+    // select.innerHTML = `<option value="">Todas las categorías</option>`;
+    // categorias.forEach(cat => {
+      // const option = document.createElement("option");
+      // option.value = cat;
+      // option.textContent = cat;
+      // if (cat === categoriaSeleccionada) option.selected = true;
+      // select.appendChild(option);
+    // });
+  // }
+
+  // function calcularTotales(productos) {
+    // let costoTotal = 0;
+    // let ventaEsperada = 0;
+    // let ingresoReal = 0;
+    // let gananciaReal = 0;
+
+    // productos.forEach(p => {
+      // costoTotal += p.stock * p.precioCosto;
+      // ventaEsperada += p.stock * p.precioVenta;
+      // ingresoReal += (p.vendido || 0) * p.precioVenta;
+      // gananciaReal += (p.vendido || 0) * (p.precioVenta - p.precioCosto);
+    // });
+
+    // return { costoTotal, ventaEsperada, ingresoReal, gananciaReal };
+  // }
+
+  // function mostrarTotales(productos) {
+    // const totales = calcularTotales(productos);
+    // totalesContainer.innerHTML = `
+      // <button id="mostrarTotalesBtn">👁️ Mostrar Totales</button>
+      // <div id="panelTotales" style="display:none; margin-top:1em;">
+        // <p><strong>Costo Total:</strong> $${totales.costoTotal}</p>
+        // <p><strong>Venta Esperada:</strong> $${totales.ventaEsperada}</p>
+        // <p><strong>Ingreso Real:</strong> $${totales.ingresoReal}</p>
+        // <p><strong>Ganancia Real:</strong> $${totales.gananciaReal}</p>
+      // </div>
+    // `;
+
+    // document.getElementById("mostrarTotalesBtn").addEventListener("click", () => {
+      // const panel = document.getElementById("panelTotales");
+      // panel.style.display = panel.style.display === "none" ? "block" : "none";
+    // });
+  // }
+
+  // function cargarProductos() {
+    // const clave = `productos_${usuarioActivo}`;
+    // const productos = JSON.parse(localStorage.getItem(clave) || "[]");
+
+    // crearSelectCategorias(productos);
+
+    // const productosFiltrados = categoriaSeleccionada
+      // ? productos.filter(p => p.categoria === categoriaSeleccionada)
+      // : productos;
+
+    // productosContainer.innerHTML = "";
+
+    // productosFiltrados.forEach(prod => {
+      // const div = document.createElement("div");
+      // div.className = "producto-item";
+
+      // let html = `<h3>${prod.nombre}</h3>`;
+      // html += `<p>Stock disponible: ${prod.stock}</p>`;
+      // html += `<p>Categoría: ${prod.categoria}</p>`;
+      // if (mostrarPrecios) {
+        // html += `<p>Precio costo: $${prod.precioCosto}</p>`;
+        // html += `<p>Precio venta: $${prod.precioVenta}</p>`;
+      // }
+      // html += `<button onclick="venderProducto(${prod.id})">Vender</button>`;
+
+      // div.innerHTML = html;
+      // productosContainer.appendChild(div);
+    // });
+
+    // mostrarTotales(productosFiltrados);
+  // }
+
+  // togglePreciosBtn.addEventListener("click", () => {
+    // mostrarPrecios = !mostrarPrecios;
+    // togglePreciosBtn.textContent = mostrarPrecios ? "Ocultar precios" : "Mostrar precios";
+    // cargarProductos();
+  // });
+
+  // addStockBtn.addEventListener("click", () => {
+    // const nombre = prompt("Nombre del producto:");
+    // const categoria = prompt("Categoría:");
+    // const precioCosto = parseFloat(prompt("Precio de costo:"));
+    // const precioVenta = parseFloat(prompt("Precio de venta:"));
+    // const stockInicial = parseInt(prompt("Cantidad ingresada:"), 10);
+
+    // if (!nombre || isNaN(precioCosto) || isNaN(precioVenta) || isNaN(stockInicial)) {
+      // alert("Campos inválidos.");
+      // return;
+    // }
+
+    // const clave = `productos_${usuarioActivo}`;
+    // const productos = JSON.parse(localStorage.getItem(clave) || "[]");
+
+    // productos.push({
+      // id: Date.now(),
+      // nombre,
+      // categoria,
+      // precioCosto,
+      // precioVenta,
+      // stock: stockInicial,
+      // vendido: 0
+    // });
+
+    // localStorage.setItem(clave, JSON.stringify(productos));
+    // cargarProductos();
+  // });
+
+  // window.venderProducto = function (id) {
+    // const clave = `productos_${usuarioActivo}`;
+    // const productos = JSON.parse(localStorage.getItem(clave) || "[]");
+
+    // const index = productos.findIndex(p => p.id === id);
+    // if (index === -1 || productos[index].stock <= 0) {
+      // alert("No hay stock disponible.");
+      // return;
+    // }
+
+    // productos[index].stock--;
+    // productos[index].vendido = (productos[index].vendido || 0) + 1;
+    // localStorage.setItem(clave, JSON.stringify(productos));
+    // cargarProductos();
+  // };
+
+  // cargarProductos();
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// document.addEventListener("DOMContentLoaded", () => {
+  // const productosContainer = document.getElementById("productosContainer");
+  // const togglePreciosBtn = document.getElementById("togglePreciosBtn");
+  // const addStockBtn = document.getElementById("addStockBtn");
+  // const totalesContainer = document.getElementById("totalesContainer");
+
+  // let mostrarPrecios = false;
+  // let categoriaSeleccionada = "";
+
+  // const usuarioActivo = localStorage.getItem("usuarioActivo");
+  // if (!usuarioActivo) return;
+
+  // document.getElementById("authSection").style.display = "none";
+  // document.getElementById("appSection").style.display = "block";
+
+  // function crearSelectCategorias(productos) {
+    // let select = document.getElementById("selectCategorias");
+    // if (!select) {
+      // select = document.createElement("select");
+      // select.id = "selectCategorias";
+      // select.innerHTML = `<option value="">Todas las categorías</option>`;
+      // productosContainer.before(select);
+      // select.addEventListener("change", () => {
+        // categoriaSeleccionada = select.value;
+        // cargarProductos();
+      // });
+    // }
+
+    // const categorias = [...new Set(productos.map(p => p.categoria))];
+    // select.innerHTML = `<option value="">Todas las categorías</option>`;
+    // categorias.forEach(cat => {
+      // const option = document.createElement("option");
+      // option.value = cat;
+      // option.textContent = cat;
+      // if (cat === categoriaSeleccionada) option.selected = true;
+      // select.appendChild(option);
+    // });
+  // }
+
+  // function calcularTotales(productos) {
+    // let costoTotal = 0;
+    // let ventaEsperada = 0;
+    // let ingresoReal = 0;
+    // let gananciaReal = 0;
+
+    // productos.forEach(p => {
+      // costoTotal += p.stock * p.precioCosto;
+      // ventaEsperada += p.stock * p.precioVenta;
+      // ingresoReal += (p.vendido || 0) * p.precioVenta;
+      // gananciaReal += (p.vendido || 0) * (p.precioVenta - p.precioCosto);
+    // });
+
+    // return { costoTotal, ventaEsperada, ingresoReal, gananciaReal };
+  // }
+
+  // function mostrarTotales(productos) {
+    // const totales = calcularTotales(productos);
+    // totalesContainer.innerHTML = `
+      // <button id="mostrarTotalesBtn">👁️ Mostrar Totales</button>
+      // <div id="panelTotales" style="display:none; margin-top:1em;">
+        // <p><strong>Costo Total:</strong> $${totales.costoTotal}</p>
+        // <p><strong>Venta Esperada:</strong> $${totales.ventaEsperada}</p>
+        // <p><strong>Ingreso Real:</strong> $${totales.ingresoReal}</p>
+        // <p><strong>Ganancia Real:</strong> $${totales.gananciaReal}</p>
+      // </div>
+    // `;
+
+    // document.getElementById("mostrarTotalesBtn").addEventListener("click", () => {
+      // const panel = document.getElementById("panelTotales");
+      // panel.style.display = panel.style.display === "none" ? "block" : "none";
+    // });
+  // }
+
+  // function cargarProductos() {
+    // const clave = `productos_${usuarioActivo}`;
+    // const productos = JSON.parse(localStorage.getItem(clave) || "[]");
+
+    // crearSelectCategorias(productos);
+
+    // const productosFiltrados = categoriaSeleccionada
+      // ? productos.filter(p => p.categoria === categoriaSeleccionada)
+      // : productos;
+
+    // productosContainer.innerHTML = "";
+
+    // productosFiltrados.forEach(prod => {
+      // const div = document.createElement("div");
+      // div.className = "producto-item";
+
+      // let html = `<h3>${prod.nombre}</h3>`;
+      // html += `<p>Stock disponible: ${prod.stock}</p>`;
+      // html += `<p>Categoría: ${prod.categoria}</p>`;
+      // if (mostrarPrecios) {
+        // html += `<p>Precio costo: $${prod.precioCosto}</p>`;
+        // html += `<p>Precio venta: $${prod.precioVenta}</p>`;
+      // }
+      // html += `<button onclick="venderProducto(${prod.id})">Vender</button>`;
+
+      // div.innerHTML = html;
+      // productosContainer.appendChild(div);
+    // });
+
+    // mostrarTotales(productosFiltrados);
+  // }
+
+  // togglePreciosBtn.addEventListener("click", () => {
+    // mostrarPrecios = !mostrarPrecios;
+    // togglePreciosBtn.textContent = mostrarPrecios ? "Ocultar precios" : "Mostrar precios";
+    // cargarProductos();
+  // });
+
+  // addStockBtn.addEventListener("click", () => {
+    // const nombre = prompt("Nombre del producto:");
+    // const categoria = prompt("Categoría:");
+    // const precioCosto = parseFloat(prompt("Precio de costo:"));
+    // const precioVenta = parseFloat(prompt("Precio de venta:"));
+    // const stockInicial = parseInt(prompt("Cantidad ingresada:"), 10);
+
+    // if (!nombre || isNaN(precioCosto) || isNaN(precioVenta) || isNaN(stockInicial)) {
+      // alert("Campos inválidos.");
+      // return;
+    // }
+
+    // const clave = `productos_${usuarioActivo}`;
+    // const productos = JSON.parse(localStorage.getItem(clave) || "[]");
+
+    // productos.push({
+      // id: Date.now(),
+      // nombre,
+      // categoria,
+      // precioCosto,
+      // precioVenta,
+      // stock: stockInicial,
+      // vendido: 0
+    // });
+
+    // localStorage.setItem(clave, JSON.stringify(productos));
+    // cargarProductos();
+  // });
+
+  // window.venderProducto = function (id) {
+    // const clave = `productos_${usuarioActivo}`;
+    // const productos = JSON.parse(localStorage.getItem(clave) || "[]");
+
+    // const index = productos.findIndex(p => p.id === id);
+    // if (index === -1 || productos[index].stock <= 0) {
+      // alert("No hay stock disponible.");
+      // return;
+    // }
+
+    // productos[index].stock--;
+    // productos[index].vendido = (productos[index].vendido || 0) + 1;
+    // localStorage.setItem(clave, JSON.stringify(productos));
+    // cargarProductos();
+  // };
+
+  // cargarProductos();
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // app.js - Funcionalidad de la app de panadería
+// // Autor: Cristian Altamiranda
+
+// document.addEventListener("DOMContentLoaded", () => {
+  // const productosContainer = document.getElementById("productosContainer");
+  // const togglePreciosBtn = document.getElementById("togglePreciosBtn");
+  // const addStockBtn = document.getElementById("addStockBtn");
+
+  // let mostrarPrecios = false;
+  // let categoriaSeleccionada = "";
+
+  // const usuarioActivo = localStorage.getItem("usuarioActivo");
+  // if (!usuarioActivo) return;
+
+  // document.getElementById("authSection").style.display = "none";
+  // document.getElementById("appSection").style.display = "block";
+
+  // // Crear y mostrar el select de categorías
+  // function crearSelectCategorias(productos) {
+    // let select = document.getElementById("selectCategorias");
+    // if (!select) {
+      // select = document.createElement("select");
+      // select.id = "selectCategorias";
+      // select.innerHTML = `<option value="">Todas las categorías</option>`;
+      // productosContainer.before(select);
+      // select.addEventListener("change", () => {
+        // categoriaSeleccionada = select.value;
+        // cargarProductos();
+      // });
+    // }
+
+    // const categorias = [...new Set(productos.map(p => p.categoria))];
+    // select.innerHTML = `<option value="">Todas las categorías</option>`;
+    // categorias.forEach(cat => {
+      // const option = document.createElement("option");
+      // option.value = cat;
+      // option.textContent = cat;
+      // if (cat === categoriaSeleccionada) option.selected = true;
+      // select.appendChild(option);
+    // });
+  // }
+
+  // function cargarProductos() {
+    // const clave = `productos_${usuarioActivo}`;
+    // const productos = JSON.parse(localStorage.getItem(clave) || "[]");
+
+    // crearSelectCategorias(productos);
+
+    // const productosFiltrados = categoriaSeleccionada
+      // ? productos.filter(p => p.categoria === categoriaSeleccionada)
+      // : productos;
+
+    // productosContainer.innerHTML = "";
+
+    // productosFiltrados.forEach(prod => {
+      // const div = document.createElement("div");
+      // div.className = "producto-item";
+
+      // let html = `<h3>${prod.nombre}</h3>`;
+      // html += `<p>Stock: ${prod.stock}</p>`;
+      // html += `<p>Categoría: ${prod.categoria}</p>`;
+      // if (mostrarPrecios) {
+        // html += `<p>Precio costo: $${prod.precioCosto}</p>`;
+        // html += `<p>Precio venta: $${prod.precioVenta}</p>`;
+      // }
+      // html += `<button onclick="venderProducto(${prod.id})">Vender</button>`;
+
+      // div.innerHTML = html;
+      // productosContainer.appendChild(div);
+    // });
+  // }
+
+  // togglePreciosBtn.addEventListener("click", () => {
+    // mostrarPrecios = !mostrarPrecios;
+    // togglePreciosBtn.textContent = mostrarPrecios ? "Ocultar precios" : "Mostrar precios";
+    // cargarProductos();
+  // });
+
+  // addStockBtn.addEventListener("click", () => {
+    // const nombre = prompt("Nombre del producto:");
+    // const categoria = prompt("Categoría:");
+    // const precioCosto = parseFloat(prompt("Precio de costo:"));
+    // const precioVenta = parseFloat(prompt("Precio de venta:"));
+    // const stockInicial = parseInt(prompt("Cantidad ingresada:"), 10);
+
+    // if (!nombre || isNaN(precioCosto) || isNaN(precioVenta) || isNaN(stockInicial)) {
+      // alert("Campos inválidos.");
+      // return;
+    // }
+
+    // const clave = `productos_${usuarioActivo}`;
+    // const productos = JSON.parse(localStorage.getItem(clave) || "[]");
+
+    // productos.push({
+      // id: Date.now(),
+      // nombre,
+      // categoria,
+      // precioCosto,
+      // precioVenta,
+      // stock: stockInicial
+    // });
+
+    // localStorage.setItem(clave, JSON.stringify(productos));
+    // cargarProductos();
+  // });
+
+  // window.venderProducto = function (id) {
+    // const clave = `productos_${usuarioActivo}`;
+    // const productos = JSON.parse(localStorage.getItem(clave) || "[]");
+
+    // const index = productos.findIndex(p => p.id === id);
+    // if (index === -1 || productos[index].stock <= 0) {
+      // alert("No hay stock disponible.");
+      // return;
+    // }
+
+    // productos[index].stock--;
+    // localStorage.setItem(clave, JSON.stringify(productos));
+    // cargarProductos();
+  // };
+
+  // cargarProductos();
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // app.js - Funcionalidad de la app de panadería
+// // Autor: Cristian Altamiranda
+
+// document.addEventListener("DOMContentLoaded", () => {
+  // const productosContainer = document.getElementById("productosContainer");
+  // const togglePreciosBtn = document.getElementById("togglePreciosBtn");
+  // const addStockBtn = document.getElementById("addStockBtn");
+
+  // let mostrarPrecios = false;
+
+  // const usuarioActivo = localStorage.getItem("usuarioActivo");
+  // if (!usuarioActivo) return;
+
+  // // Mostrar contenido app
+  // document.getElementById("authSection").style.display = "none";
+  // document.getElementById("appSection").style.display = "block";
+
+  // // === Cargar productos ===
+  // function cargarProductos() {
+    // const clave = `productos_${usuarioActivo}`;
+    // const productos = JSON.parse(localStorage.getItem(clave) || "[]");
+    // productosContainer.innerHTML = "";
+
+    // productos.forEach(prod => {
+      // const div = document.createElement("div");
+      // div.className = "producto-item";
+
+      // let html = `<h3>${prod.nombre}</h3>`;
+      // html += `<p>Stock: ${prod.stock}</p>`;
+      // html += `<p>Categoría: ${prod.categoria}</p>`;
+      // if (mostrarPrecios) {
+        // html += `<p>Precio costo: $${prod.precioCosto}</p>`;
+        // html += `<p>Precio venta: $${prod.precioVenta}</p>`;
+      // }
+      // html += `<button onclick="venderProducto(${prod.id})">Vender</button>`;
+
+      // div.innerHTML = html;
+      // productosContainer.appendChild(div);
+    // });
+  // }
+
+  // // === Botón: Mostrar/Ocultar precios ===
+  // togglePreciosBtn.addEventListener("click", () => {
+    // mostrarPrecios = !mostrarPrecios;
+    // togglePreciosBtn.textContent = mostrarPrecios ? "Ocultar precios" : "Mostrar precios";
+    // cargarProductos();
+  // });
+
+  // // === Botón: Agregar stock del día ===
+  // addStockBtn.addEventListener("click", () => {
+    // const nombre = prompt("Nombre del producto:");
+    // const categoria = prompt("Categoría:");
+    // const precioCosto = parseFloat(prompt("Precio de costo:"));
+    // const precioVenta = parseFloat(prompt("Precio de venta:"));
+    // const stockInicial = parseInt(prompt("Cantidad ingresada:"), 10);
+
+    // if (!nombre || isNaN(precioCosto) || isNaN(precioVenta) || isNaN(stockInicial)) {
+      // alert("Campos inválidos.");
+      // return;
+    // }
+
+    // const clave = `productos_${usuarioActivo}`;
+    // const productos = JSON.parse(localStorage.getItem(clave) || "[]");
+
+    // productos.push({
+      // id: Date.now(),
+      // nombre,
+      // categoria,
+      // precioCosto,
+      // precioVenta,
+      // stock: stockInicial
+    // });
+
+    // localStorage.setItem(clave, JSON.stringify(productos));
+    // cargarProductos();
+  // });
+
+  // // === Botón: Vender producto ===
+  // window.venderProducto = function (id) {
+    // const clave = `productos_${usuarioActivo}`;
+    // const productos = JSON.parse(localStorage.getItem(clave) || "[]");
+
+    // const index = productos.findIndex(p => p.id === id);
+    // if (index === -1 || productos[index].stock <= 0) {
+      // alert("No hay stock disponible.");
+      // return;
+    // }
+
+    // productos[index].stock--;
+    // localStorage.setItem(clave, JSON.stringify(productos));
+    // cargarProductos();
+  // };
+
+  // // === Inicializar ===
+  // cargarProductos();
+// });
+
+
+
+
+
+
+
+
+// // let stockDiario = {};
+// // let turnos = ['mañana', 'tarde'];
+
+// // document.getElementById('agregarStock').onclick = () => {
+    // // const producto = prompt('Producto ingresado:');
+    // // const cantidad = parseInt(prompt('Cantidad ingresada:'), 10);
+    // // const turno = prompt('Turno (mañana o tarde):');
+    // // if (producto && cantidad && turnos.includes(turno)) {
+        // // if (!stockDiario[turno]) stockDiario[turno] = {};
+        // // stockDiario[turno][producto] = (stockDiario[turno][producto] || 0) + cantidad;
+        // // alert('Stock agregado correctamente.');
+    // // } else {
+        // // alert('Datos inválidos.');
+    // // }
+// // };
+
+// // document.getElementById('reponerMercaderia').onclick = () => {
+    // // const producto = prompt('Producto a reponer:');
+    // // const cantidad = parseInt(prompt('Cantidad a reponer:'), 10);
+    // // const turno = prompt('Turno (mañana o tarde):');
+    // // if (producto && cantidad && turnos.includes(turno)) {
+        // // if (!stockDiario[turno]) stockDiario[turno] = {};
+        // // stockDiario[turno][producto] = (stockDiario[turno][producto] || 0) + cantidad;
+        // // alert('Reposición realizada.');
+    // // } else {
+        // // alert('Datos inválidos.');
+    // // }
+// // };
+
+// // document.getElementById('calcularPromedios').onclick = () => {
+    // // const ctx = document.getElementById('graficoPromedios').getContext('2d');
+    // // const productos = Array.from(new Set([
+        // // ...Object.keys(stockDiario['mañana'] || {}),
+        // // ...Object.keys(stockDiario['tarde'] || {})
+    // // ]));
+
+    // // const promedioManana = productos.map(p => (stockDiario['mañana']?.[p] || 0));
+    // // const promedioTarde = productos.map(p => (stockDiario['tarde']?.[p] || 0));
+
+    // // new Chart(ctx, {
+        // // type: 'bar',
+        // // data: {
+            // // labels: productos,
+            // // datasets: [{
+                // // label: 'Mañana',
+                // // data: promedioManana,
+                // // backgroundColor: 'rgba(255, 206, 86, 0.5)'
+            // // }, {
+                // // label: 'Tarde',
+                // // data: promedioTarde,
+                // // backgroundColor: 'rgba(75, 192, 192, 0.5)'
+            // // }]
+        // // },
+        // // options: {
+            // // responsive: true,
+            // // scales: {
+                // // y: {
+                    // // beginAtZero: true
+                // // }
+            // // }
+        // // }
+    // // });
+// // };
